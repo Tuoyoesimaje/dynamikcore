@@ -80,16 +80,46 @@ button{
 .credibility-section{
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  justify-content: center;
   padding: 40px 30px;
   margin: 30px 0;
   background-color: #FFFFFF;
+  overflow: hidden;
+}
+
+.credibility-container{
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.credibility-track{
+  display: flex;
+  width: 200%; /* Double width to accommodate duplicated icons */
+  animation: scroll 30s linear infinite;
+  gap: 200px;
 }
 
 .icons{
   object-fit: contain;
   width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+}
+
+/* Scrolling animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* Scroll by half the width (one complete set of icons) */
+  }
+}
+
+/* Pause animation on hover for better UX */
+.credibility-section:hover .credibility-track {
+  animation-play-state: paused;
 }
 
 .collaboration-section{
