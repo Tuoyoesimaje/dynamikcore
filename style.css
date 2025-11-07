@@ -348,21 +348,14 @@ button{
   flex-direction: column;
 }
 
-/* Projects Modal - Properly centered */
-.projects-modal {
-  width: 85%;
-  max-width: 1000px;
-  padding: 50px;
-  margin: 0 auto;
-}
-
+/* Modal Header */
 .modal-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .modal-title {
-  font-size: 2.2rem;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
   font-weight: 700;
   color: #2B2B2B;
   margin-bottom: 10px;
@@ -370,33 +363,65 @@ button{
 }
 
 .modal-subtitle {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
   color: #6B7280;
   margin-bottom: 0;
 }
 
+/* Modern Modal Close Button */
 .modal-close {
   position: absolute;
-  top: 20px;
-  right: 25px;
+  top: 16px;
+  right: 16px;
   background: #F5F5F0;
   border: 2px solid #E5E7EB;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  color: #2B2B2B;
+  width: 44px;
+  height: 44px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  z-index: 10;
+  padding: 0;
+  outline: none;
 }
 
 .modal-close:hover {
   background: #FFFFFF;
   border-color: #2B2B2B;
-  color: #2B2B2B;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(43, 43, 43, 0.15);
+}
+
+.modal-close:active {
+  transform: scale(0.95);
+}
+
+/* SVG Close Icon */
+.modal-close svg {
+  width: 20px;
+  height: 20px;
+  stroke: #2B2B2B;
+  stroke-width: 2.5;
+  fill: none;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover svg {
+  stroke: #2B2B2B;
+  transform: rotate(90deg);
+}
+
+/* Projects Modal - Fully Responsive */
+.projects-modal {
+  width: min(95%, 1200px);
+  max-width: 95vw;
+  max-height: 90vh;
+  padding: clamp(20px, 4vw, 50px);
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .projects-grid {
@@ -476,18 +501,20 @@ button{
   text-decoration: underline;
 }
 
-/* Contact Modal - Centered */
+/* Contact Modal - Fully Responsive */
 .contact-modal {
-  width: 450px;
-  max-width: 90%;
-  padding: 45px;
+  width: min(95%, 500px);
+  max-width: 95vw;
+  max-height: 90vh;
+  padding: clamp(20px, 4vw, 45px);
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: clamp(15px, 2vw, 20px);
 }
 
 .form-group {
@@ -572,13 +599,14 @@ button{
   margin: 0;
 }
 
-/* About Us Modal - Centered */
+/* About Us Modal - Fully Responsive */
 .about-modal {
-  width: 75%;
-  max-width: 900px;
+  width: min(95%, 1000px);
+  max-width: 95vw;
   max-height: 90vh;
-  padding: 50px;
+  padding: clamp(20px, 4vw, 50px);
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .divider {
