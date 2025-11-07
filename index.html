@@ -13,7 +13,7 @@
 
       <div class="logo-cont">
         <img src="Screenshot 2025-11-06 164536.png" alt="" style="width: 75px; justify-self: center; object-fit: contain;">
-        <button class="button-secondary top-button">
+<button class="button-secondary top-button" onclick="openModal('aboutModal')">
           About Us
         </button>
 
@@ -38,11 +38,9 @@
         <h1 class="hero-header">
           Empowering Businesses Through Software, Automation, and Innovation
         </h1>
-        <a href="">
-          <button class="button-primary">
-            Latest jobs
-          </button>
-        </a>
+<button class="button-primary" onclick="openModal('projectsModal')">
+          Latest jobs
+        </button>
 
       </section>
 
@@ -118,7 +116,7 @@
         <h1 class="contact-header">Tell us about your next project</h1>
         <span>Whether it's a website, mobile app, or custom automation — let's build something exceptional together.</span>
         <div >
-          <a href=""><button class="button-primary">Email Us</button></a>
+<button class="button-primary" onclick="openModal('contactModal')">Email Us</button>
           <a href=""><button class="button-secondary">WhatsApp</button></a>
         </div>
       </section>
@@ -136,5 +134,129 @@
       </div>
     </footer>
   </div>
+
+  <!-- Latest Projects Modal -->
+  <div id="projectsModal" class="modal">
+    <div class="modal-overlay">
+      <div class="modal-content projects-modal">
+        <button class="modal-close" onclick="closeModal('projectsModal')">&times;</button>
+        <div class="modal-header">
+          <h2 class="modal-title">Our Recent Projects</h2>
+          <p class="modal-subtitle">Real solutions we've built for real businesses.</p>
+        </div>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="video-placeholder">
+              <div class="play-icon">▶</div>
+            </div>
+            <h3 class="project-title">E-Commerce Platform</h3>
+            <span class="category-tag">Web App</span>
+            <p class="project-description">A complete online store solution with payment integration, inventory management, and customer analytics dashboard.</p>
+            <a href="#" class="view-project-link">View Project →</a>
+          </div>
+          <div class="project-card">
+            <div class="video-placeholder">
+              <div class="play-icon">▶</div>
+            </div>
+            <h3 class="project-title">Workflow Automation Tool</h3>
+            <span class="category-tag">Automation Tool</span>
+            <p class="project-description">Streamline business processes with automated task management, document processing, and report generation.</p>
+            <a href="#" class="view-project-link">View Project →</a>
+          </div>
+          <div class="project-card">
+            <div class="video-placeholder">
+              <div class="play-icon">▶</div>
+            </div>
+            <h3 class="project-title">Mobile Banking App</h3>
+            <span class="category-tag">Mobile App</span>
+            <p class="project-description">Secure mobile banking solution with biometric authentication, real-time transactions, and financial planning tools.</p>
+            <a href="#" class="view-project-link">View Project →</a>
+          </div>
+          <div class="project-card">
+            <div class="video-placeholder">
+              <div class="play-icon">▶</div>
+            </div>
+            <h3 class="project-title">Restaurant Management System</h3>
+            <span class="category-tag">Web App</span>
+            <p class="project-description">Comprehensive POS system with order management, inventory tracking, and customer loyalty program.</p>
+            <a href="#" class="view-project-link">View Project →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="modal">
+    <div class="modal-overlay">
+      <div class="modal-content contact-modal">
+        <button class="modal-close" onclick="closeModal('contactModal')">&times;</button>
+        <div class="modal-header">
+          <h2 class="modal-title">Let's Build Something Together</h2>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <input type="text" class="form-input" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" class="form-input" placeholder="Your Email" required>
+          </div>
+          <div class="form-group">
+            <textarea class="form-input form-textarea" placeholder="Tell us about your project..." minlength="120" required></textarea>
+          </div>
+          <button type="submit" class="submit-button">Send Message</button>
+          <p class="footer-note">We'll reply within 24 hours.</p>
+        </form>
+        <div class="success-message" id="successMessage">
+          <div class="success-icon">✓</div>
+          <p>Message sent successfully.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Us Modal -->
+  <div id="aboutModal" class="modal">
+    <div class="modal-overlay">
+      <div class="modal-content about-modal">
+        <button class="modal-close" onclick="closeModal('aboutModal')">&times;</button>
+        <div class="modal-header">
+          <h2 class="modal-title">About Dynamicore</h2>
+          <div class="blue-divider"></div>
+          <p class="tagline">Empowering businesses through software, automation, and innovation.</p>
+        </div>
+        <div class="about-content">
+          <div class="about-section">
+            <h3>Who We Are</h3>
+            <p>Dynamicore is a forward-thinking technology company specializing in creating innovative software solutions that drive business growth. Based in Nigeria, we partner with startups, SMEs, and growing businesses to transform their ideas into powerful digital experiences that deliver real results.</p>
+          </div>
+          <div class="about-section">
+            <h3>What We Do</h3>
+            <ul class="services-list">
+              <li>Web Development - Modern, responsive websites and web applications</li>
+              <li>Mobile App Development - Native and cross-platform mobile applications</li>
+              <li>Desktop Application Development - Custom desktop software solutions</li>
+              <li>Automation & Consultancy - Streamlining business processes through intelligent automation</li>
+            </ul>
+          </div>
+          <div class="about-section">
+            <h3>Mission & Vision</h3>
+            <p>Our mission is to empower businesses with cutting-edge technology solutions that not only meet today's challenges but also prepare them for tomorrow's opportunities. We envision a future where every business, regardless of size, has access to world-class software that drives efficiency, innovation, and growth.</p>
+          </div>
+          <div class="about-section">
+            <h3>Why Choose Us</h3>
+            <ul class="why-choose-list">
+              <li>Innovation - We stay ahead of technology trends to deliver future-proof solutions</li>
+              <li>Reliability - Count on us for consistent delivery and ongoing support</li>
+              <li>Scalability - Our solutions grow with your business needs</li>
+              <li>Support - Dedicated support team ensuring your success</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
