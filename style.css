@@ -30,7 +30,7 @@ header{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 0 20px;
 }
 .main-sections{
   flex: 1;
@@ -42,13 +42,44 @@ header{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  margin: 10px 0;
+  gap: 10px;
+  margin: 50px 0;
 }
 
 .hero-header{
   width: 40%;
   text-align: center;
+  margin-bottom: 5px;
+}
+
+.hero-pics{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
+.headshot{
+  width: 60px;
+  border-radius: 30px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.tuoyo{
+  position: relative;
+  left: -10px;
+}
+
+/*.headshot-bg{
+  width: 65px;
+  border-radius: 32.5px;
+  height: 65px;
+  background-color: #FFFFFF;
+}*/
+
+.jeff{
+  z-index: 99;
+  position: relative;
 }
 
 .logo-cont{
@@ -81,8 +112,8 @@ button{
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 30px;
-  margin: 30px 0;
+  padding: 40px 0px;
+  margin: 50px 0;
   background-color: #FFFFFF;
   overflow: hidden;
 }
@@ -128,7 +159,8 @@ button{
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin: 30px 0;
+  margin: 50px 0;
+
 }
 
 .services-section{
@@ -137,6 +169,7 @@ button{
   align-items: center;
   justify-content: center;
   padding: 0 10px;
+  margin: 50px 0;
 }
 
 .service-header{
@@ -146,12 +179,16 @@ button{
   background-color: #FFFFFF;
   color: #2B2B2B;
   align-items: center;
+  font-weight: 600;
 }
 
 .services-cont{
   display: flex;
   gap: 20px;
   flex-direction: row;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
 }
 
 .service-item{
@@ -172,7 +209,7 @@ button{
   align-items: center;
   justify-content: center;
   gap: 20px;
-  margin: 10px 0;
+  margin: 50px 0;
   margin-bottom: 70px;
 }
 
@@ -192,7 +229,8 @@ button{
   border-top: rgba(212, 212, 212, 0.4) 1px solid;
   padding: 5px;
   padding-bottom: 10px;
-  margin: 0 10px;
+  margin: 0 20px;
+  margin-top: 20px;
 }
 
 .nav-cont{
@@ -205,4 +243,10 @@ button{
 
 .nav-separator{
   text-align: center;
+}
+
+@media (max-width: 700px) {
+  .services-cont{
+    flex-direction: column;
+  }
 }
