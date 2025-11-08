@@ -99,15 +99,36 @@ button{
   font-weight: 550;
 }
 
+.about-button{
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 450;
+  text-decoration: underline;
+}
+
+.about-button:hover{
+  color: red;
+}
+
 .button-primary{
   background-color: #2B2B2B;
   color: #FFFFFF;
+}
+
+.button-primary:hover{
+  opacity: 0.8;
 }
 
 .button-secondary{
   background-color: #FFFFFF;
   color: #2B2B2B;
   border: 2px solid #F5F5F0;
+}
+
+.button-secondary:hover{
+  opacity: 0.8;
 }
 
 .credibility-section{
@@ -162,7 +183,6 @@ button{
   justify-content: center;
   gap: 10px;
   margin: 50px 0;
-
 }
 
 .services-section{
@@ -182,6 +202,7 @@ button{
   color: #2B2B2B;
   align-items: center;
   font-weight: 600;
+  transform: rotate(10deg);
 }
 
 .services-cont{
@@ -218,6 +239,21 @@ button{
   width: 25px;
   height: 25px;
   object-fit: contain;
+}
+
+.about-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin: 50px 0;
+}
+
+.about-header{
+  background-color: #2B2B2B;
+  color: #FFFFFF;
+  transform: rotate(-10deg);
 }
 
 .contact-section{
@@ -636,7 +672,7 @@ button{
 .about-content {
   display: flex;
   flex-direction: column;
-  gap: 35px;
+  gap: 10px;
   max-height: 65vh;
   overflow-y: auto;
   padding-right: 10px;
