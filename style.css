@@ -306,18 +306,20 @@ button{
 
 /* Modal Styles - Perfectly Centered */
 .modal {
+  /* Use CSS Grid to center content both horizontally and vertically.
+     Grid centering is more robust across viewport sizes and ignores
+     odd flex-child margin behavior that can cause left alignment. */
   position: fixed;
   z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   display: none;
+  place-items: center; /* centers both axes */
+  padding: 20px; /* keep some gap on small viewports */
   animation: fadeIn 0.3s ease-out;
 }
 
 .modal.active {
-  display: block;
+  display: grid;
 }
 
 .modal-overlay {
@@ -332,22 +334,25 @@ button{
 }
 
 .modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  /* Now positioned by the flex parent (.modal). Make the content
+     width-constrained and responsive so it never overflows to one side. */
+  position: relative;
   background: #FFFFFF;
   border-radius: 20px;
   box-shadow: 0 25px 80px rgba(43, 43, 43, 0.2);
   max-height: 80vh;
-  max-width: 90vw;
+  /* Constrain width and ensure centered placement.
+    width:100% keeps internal elements responsive while max-width caps size. */
+  width: 100%;
+  max-width: min(1100px, 95vw);
+  margin: 0 auto;
+  justify-self: center; /* grid centering safety */
+  box-sizing: border-box;
   overflow-y: auto;
   animation: scaleIn 0.3s ease-out;
   z-index: 1002;
   display: flex;
   flex-direction: column;
-  width: auto;
-  height: auto;
 }
 
 /* Modal Header */
@@ -418,7 +423,8 @@ button{
 
 /* Projects Modal - Centered Modal */
 .projects-modal {
-  width: min(95%, 1000px);
+  /* Make modal body fill the modal-content container and rely on modal-content for viewport sizing */
+  width: 100%;
   max-width: min(95vw, 1000px);
   max-height: 80vh;
   padding: clamp(20px, 4vw, 50px);
@@ -505,7 +511,7 @@ button{
 
 /* Contact Modal - Centered Modal */
 .contact-modal {
-  width: min(95%, 450px);
+  width: 100%;
   max-width: min(95vw, 450px);
   max-height: 80vh;
   padding: clamp(20px, 4vw, 45px);
@@ -603,7 +609,7 @@ button{
 
 /* About Us Modal - Centered Modal */
 .about-modal {
-  width: min(95%, 800px);
+  width: 100%;
   max-width: min(95vw, 800px);
   max-height: 80vh;
   padding: clamp(20px, 4vw, 50px);
