@@ -284,6 +284,11 @@ button{
   height: 25px;
   object-fit: contain;
 }
+.icon2{
+  width: 17px;
+  height: 17px;
+  object-fit: contain;
+}
 
 .about-section{
   display: flex;
@@ -357,7 +362,7 @@ button{
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
   color: inherit;
 }
 
