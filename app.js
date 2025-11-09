@@ -59,35 +59,49 @@ function closeModal(modalId) {
 // Contact form handling
 function handleContactForm(e) {
     e.preventDefault();
-    
+
+    // Formspree implementation (replace FORM_ENDPOINT with your Formspree URL)
+    const FORM_ENDPOINT = 'https://formspree.io/f/xblqrzbg'; // <-- replace this with your Formspree endpoint
     const form = e.target;
     const submitButton = form.querySelector('.submit-button');
     const successMessage = document.getElementById('successMessage');
-    const formElements = form.querySelectorAll('.form-input');
-    
+
     // Show loading state
     const originalButtonText = submitButton.textContent;
     submitButton.textContent = 'Sending...';
     submitButton.disabled = true;
-    
-    // Simulate form submission (replace with actual form handling)
-    setTimeout(() => {
-        // Reset form
-        form.reset();
-        
-        // Show success message
-        form.style.display = 'none';
-        successMessage.classList.add('show');
-        
-        // Hide success message after 3 seconds and reset form
-        setTimeout(() => {
-            successMessage.classList.remove('show');
-            form.style.display = 'flex';
+
+    const fd = new FormData(form);
+
+    fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        body: fd,
+        headers: { 'Accept': 'application/json' }
+    }).then(async (res) => {
+        if (res.ok) {
+            form.reset();
+            form.style.display = 'none';
+            successMessage.classList.add('show');
+
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+                form.style.display = 'flex';
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+            }, 3000);
+        } else {
+            const data = await res.json();
+            console.error('Form submission error', data);
+            alert('Failed to send message. Please try again later.');
             submitButton.textContent = originalButtonText;
             submitButton.disabled = false;
-        }, 3000);
-        
-    }, 1500); // Simulate network delay
+        }
+    }).catch((err) => {
+        console.error('Network error', err);
+        alert('Network error. Please try again.');
+        submitButton.textContent = originalButtonText;
+        submitButton.disabled = false;
+    });
 }
 
 // Add touch support for mobile devices
