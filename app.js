@@ -235,6 +235,87 @@ function closeModal(modalId) {
     }
 }
 
+// ===== Projects data and renderer =====
+// Edit this array to add/remove projects. Each object should contain:
+// { title, category, description, videoSrc, link }
+const projects = [
+    {
+        title: 'E-Commerce Platform',
+        category: 'Web App',
+        description: 'A complete online store solution with payment integration, inventory management, and customer analytics dashboard.',
+        videoSrc: '',
+        link: '#'
+    },
+    {
+        title: 'Workflow Automation Tool',
+        category: 'Automation Tool',
+        description: 'Streamline business processes with automated task management, document processing, and report generation.',
+        videoSrc: '',
+        link: '#'
+    },
+    {
+        title: 'Mobile Banking App',
+        category: 'Mobile App',
+        description: 'Secure mobile banking solution with biometric authentication, real-time transactions, and financial planning tools.',
+        videoSrc: '',
+        link: '#'
+    },
+    {
+        title: 'Restaurant Management System',
+        category: 'Web App',
+        description: 'Comprehensive POS system with order management, inventory tracking, and customer loyalty program.',
+        videoSrc: '',
+        link: '#'
+    }
+];
+
+function renderProjects() {
+    const grid = document.getElementById('projectsGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    projects.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'project-card';
+
+        // Video placeholder (you can swap for <video> or <img> when videoSrc is set)
+        const vp = document.createElement('div');
+        vp.className = 'video-placeholder';
+        const play = document.createElement('div');
+        play.className = 'play-icon';
+        play.textContent = '▶';
+        vp.appendChild(play);
+        card.appendChild(vp);
+
+        const h3 = document.createElement('h3');
+        h3.className = 'project-title';
+        h3.textContent = p.title;
+        card.appendChild(h3);
+
+        const tag = document.createElement('span');
+        tag.className = 'category-tag';
+        tag.textContent = p.category;
+        card.appendChild(tag);
+
+        const desc = document.createElement('p');
+        desc.className = 'project-description';
+        desc.textContent = p.description;
+        card.appendChild(desc);
+
+        const a = document.createElement('a');
+        a.className = 'view-project-link';
+        a.href = p.link || '#';
+        a.textContent = 'View Project →';
+        a.target = '_blank';
+        card.appendChild(a);
+
+        grid.appendChild(card);
+    });
+}
+
+// Render projects on load
+document.addEventListener('DOMContentLoaded', renderProjects);
+
 // (keyboard helpers removed)
 
 // Minimal contact-modal focus handler: scroll focused input into view
