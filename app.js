@@ -379,3 +379,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Simple scroll reveal using IntersectionObserver
+function initScrollReveal() {
+    const elems = document.querySelectorAll('.reveal-on-scroll');
+    if (!elems || elems.length === 0) return;
+
+    // If user prefers reduced motion or IntersectionObserver isn't supported, show immediately
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced || typeof IntersectionObserver === 'undefined') {
+        elems.forEach(el => el.classList.add('is-visible'));
+        return;
+    }
+
+    // Use a slightly smaller threshold and neutral rootMargin so elements
+    // that are already visible on load (footer on short pages, for example)
+    // will be revealed reliably. Also add an immediate fallback for elements
+    // already in view to ensure nothing stays hidden due to strict margins.
+    const io = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.05, rootMargin: '0px' });
+
+    elems.forEach(el => {
+        // If element is already inside the viewport, reveal it immediately.
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom >= 0) {
+            el.classList.add('is-visible');
+            return;
+        }
+        io.observe(el);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initScrollReveal);
