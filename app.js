@@ -27,7 +27,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add touch support for mobile
     addTouchSupport();
+
+    // Mobile menu toggle (attach listeners)
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileToggle && mobileMenu) {
+        mobileToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('open');
+            mobileMenu.setAttribute('aria-hidden', mobileMenu.classList.contains('open') ? 'false' : 'true');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('#mobileMenu') && !e.target.closest('#mobileToggle')) {
+                mobileMenu.classList.remove('open');
+                mobileMenu.setAttribute('aria-hidden', 'true');
+            }
+        });
+    }
 });
+
+// Utility functions for mobile menu
+function closeMobileMenu() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenu) {
+        mobileMenu.classList.remove('open');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+    }
+}
 
 // Open modal function
 function openModal(modalId) {

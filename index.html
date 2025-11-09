@@ -19,6 +19,16 @@
 
       </div>
 
+      <!-- Mobile toggle (visible on small screens) -->
+      <button id="mobileToggle" class="mobile-toggle" aria-label="Open menu">
+        <!-- simple hamburger icon -->
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect y="1" width="20" height="2" rx="1" fill="#2B2B2B" />
+          <rect y="6" width="20" height="2" rx="1" fill="#2B2B2B" />
+          <rect y="11" width="20" height="2" rx="1" fill="#2B2B2B" />
+        </svg>
+      </button>
+
       <div class="nav-cont">
         <a href="">Linkedin</a>
         <span>/</span>
@@ -28,6 +38,15 @@
       </div>
 
     </header>
+
+    <!-- Mobile menu - shown when hamburger is toggled -->
+    <nav id="mobileMenu" class="mobile-menu" aria-hidden="true">
+      <ul>
+        <li><a href="#" onclick="openModal('projectsModal'); closeMobileMenu();">Projects</a></li>
+        <li><a href="#" onclick="openModal('aboutModal'); closeMobileMenu();">About</a></li>
+        <li><a href="#" onclick="openModal('contactModal'); closeMobileMenu();">Contact</a></li>
+      </ul>
+    </nav>
 
     <div class="main-sections">
       <section class="hero-section">

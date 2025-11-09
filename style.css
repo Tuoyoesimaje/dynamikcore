@@ -1,5 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
+:root{
+  --bg: #F5F5F0; /* page background */
+  --text: #2B2B2B; /* main text / primary color */
+  --panel: #fcfcf9e3; /* cards / panels */
+  --muted: #6B7280; /* secondary text */
+  --accent-border: #E5E7EB;
+}
+
+/* Dark theme variables (toggle by setting data-theme="dark" on <html> or <body>) */
+[data-theme="dark"]{
+  --bg: #2B1E19; /* dark brown background */
+  --text: #F5EFE9; /* light text color */
+  --panel: #3a2f2b; /* darker panel */
+  --muted: #BDB6AE;
+  --accent-border: rgba(255,255,255,0.06);
+}
+
 *{
   padding: 0;
   margin: 0;
@@ -30,6 +47,15 @@ a{
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+/* Mobile menu & toggle defaults (hidden on larger screens) */
+.mobile-toggle{
+  display: none;
+}
+
+.mobile-menu{
+  display: none;
 }
 header{
   display: flex;
@@ -392,11 +418,91 @@ button{
 }
 
 @media (max-width: 497px){
+  /* Keep header visible on mobile but hide the desktop nav and show a compact mobile toggle/menu */
   header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+  }
+
+  .nav-cont{
     display: none;
   }
+
+  .top-button{
+    display: none; /* hide the desktop about button on small screens */
+  }
+
   .hero-section{
     margin-top: 80px;
+  }
+
+  /* Mobile toggle (hamburger) */
+  .mobile-toggle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fcfcf9e3;
+    border: none;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    cursor: pointer;
+    padding: 6px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Mobile menu panel */
+  .mobile-menu{
+    position: absolute;
+    top: 68px;
+    left: 12px;
+    right: 12px;
+    margin: 0 auto;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #fcfcf9e3;
+    border-radius: 14px;
+    padding: 10px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 180ms ease, transform 180ms ease;
+    z-index: 9999;
+  }
+
+  .mobile-menu.open{
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .mobile-menu ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mobile-menu a{
+    display: block;
+    padding: 12px 14px;
+    border-radius: 10px;
+    color: #2B2B2B;
+    text-decoration: none;
+    font-weight: 600;
+    background: transparent;
+  }
+
+  .mobile-menu a:hover{
+    background: rgba(43,43,43,0.06);
   }
 
   .hero-header{
