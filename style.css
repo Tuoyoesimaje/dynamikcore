@@ -461,7 +461,7 @@ button{
   z-index: 1000;
   inset: 0;
   display: none;
-  padding: 20px; /* small gap on small screens */
+  padding: 0; /* padding applied only for small screens below */
   animation: fadeIn 0.3s ease-out;
 }
 
@@ -489,6 +489,8 @@ button{
   border-radius: 20px;
   box-shadow: 0 25px 80px rgba(43, 43, 43, 0.2);
   max-height: 80vh;
+  /* center relative to the overlay using percentage (50%). Use margin on small screens
+    to keep spacing inside the overlay (see media query below). */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -881,6 +883,11 @@ button{
     margin: 10px;
   }
 
+  /* Add overlay padding only on smaller screens so modal doesn't touch edges */
+  .modal {
+    padding: 20px;
+  }
+
   .projects-modal {
     width: 95vw;
     max-width: 95vw;
@@ -924,6 +931,48 @@ button{
 
   .about-section h3 {
     font-size: clamp(1.1rem, 3vw, 1.2rem);
+  }
+}
+
+/* Fix centering for mid-size viewports (tablets / small laptops)
+   where the modal was drifting to the right (700px - 1000px). */
+@media (min-width: 700px) and (max-width: 1000px) {
+  .modal {
+    /* keep some internal spacing so modal doesn't touch edges */
+    padding: 20px;
+  }
+
+  .modal-content {
+    /* ensure it's absolutely centered relative to the overlay */
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: min(90vw, 760px) !important;
+    max-width: 900px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* Force strict centering for small and narrow viewports (phones/tablets)
+   to avoid visual drift to the right when viewport chrome or scrollbars
+   change size in devtools. This overrides any leftover margins. */
+@media (max-width: 800px) {
+  .modal {
+    padding: 20px; /* ensure breathing room */
+  }
+
+  .modal-content {
+    /* Center relative to viewport/overlay and force full responsive width */
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: calc(100% - 40px) !important; /* respect modal padding */
+    max-width: 700px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
   }
 }
 
