@@ -455,20 +455,18 @@ button{
 
 /* Modal Styles - Perfectly Centered */
 .modal {
-  /* Use CSS Grid to center content both horizontally and vertically.
-     Grid centering is more robust across viewport sizes and ignores
-     odd flex-child margin behavior that can cause left alignment. */
+  /* Fullscreen fixed overlay. Child .modal-content is absolutely centered
+     using transform so it won't shift with viewport scrolling when keyboard opens. */
   position: fixed;
   z-index: 1000;
   inset: 0;
   display: none;
-  place-items: center; /* centers both axes */
-  padding: 20px; /* keep some gap on small viewports */
+  padding: 20px; /* small gap on small screens */
   animation: fadeIn 0.3s ease-out;
 }
 
 .modal.active {
-  display: grid;
+  display: block;
 }
 
 .modal-overlay {
@@ -483,19 +481,19 @@ button{
 }
 
 .modal-content {
-  /* Now positioned by the flex parent (.modal). Make the content
-     width-constrained and responsive so it never overflows to one side. */
-  position: relative;
+  /* Absolutely center the modal inside the fixed overlay. This is
+     robust on mobile because transform centering ignores viewport
+     scrolling that can happen when the keyboard opens. */
+  position: absolute;
   background: #fcfcf9e3;
   border-radius: 20px;
   box-shadow: 0 25px 80px rgba(43, 43, 43, 0.2);
   max-height: 80vh;
-  /* Constrain width and ensure centered placement.
-    width:100% keeps internal elements responsive while max-width caps size. */
-  width: 100%;
-  max-width: min(1100px, 95vw);
-  margin: 0 auto;
-  justify-self: center; /* grid centering safety */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(95vw, 720px);
+  max-width: 1100px;
   box-sizing: border-box;
   overflow-y: auto;
   animation: scaleIn 0.3s ease-out;
