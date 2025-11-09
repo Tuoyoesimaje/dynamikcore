@@ -234,3 +234,81 @@ function closeModal(modalId) {
         trackModalEvent(modalId, 'closed');
     }
 }
+
+/* ===== Keyboard / Visual Viewport helpers for mobile (Android) ===== */
+// Keep inputs visible when the on-screen keyboard appears
+(function keyboardModalHelpers() {
+    // Only run in browsers that have document.querySelector
+    if (!document.querySelector) return;
+
+    // Utility to apply keyboard-open state and adjust modal-content maxHeight
+    function handleKeyboardOpen(modalEl, focusedEl) {
+        modalEl.classList.add('keyboard-open');
+
+        const content = modalEl.querySelector('.modal-content');
+        if (!content) return;
+
+        // If visualViewport is available, use it to compute available height
+        if (window.visualViewport) {
+            const vv = window.visualViewport;
+            const available = vv.height - 40; // leave some padding
+            content.style.maxHeight = available + 'px';
+        } else {
+            // fallback: use window.innerHeight
+            const available = window.innerHeight - 200;
+            content.style.maxHeight = Math.max(200, available) + 'px';
+        }
+
+        // Scroll focused element into view inside modal-content
+        setTimeout(() => {
+            try {
+                focusedEl.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+            } catch (err) {
+                // ignore
+            }
+        }, 250);
+    }
+
+    function handleKeyboardClose(modalEl) {
+        modalEl.classList.remove('keyboard-open');
+        const content = modalEl.querySelector('.modal-content');
+        if (content) {
+            content.style.maxHeight = ''; // let CSS handle sizes again
+        }
+    }
+
+    // Attach to any modal that contains form inputs (run on DOMContentLoaded)
+    document.addEventListener('DOMContentLoaded', () => {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+            // focusin/focusout bubble and work well across inputs
+            modal.addEventListener('focusin', (e) => {
+                const tag = (e.target && e.target.tagName || '').toLowerCase();
+                if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) {
+                    handleKeyboardOpen(modal, e.target);
+                }
+            });
+
+            modal.addEventListener('focusout', (e) => {
+                // Slight delay to handle switching between inputs
+                setTimeout(() => {
+                    if (!modal.contains(document.activeElement)) {
+                        handleKeyboardClose(modal);
+                    }
+                }, 100);
+            });
+
+            // If the browser supports visualViewport, update sizes when it resizes
+            if (window.visualViewport) {
+                window.visualViewport.addEventListener('resize', () => {
+                    // If modal is open and keyboard likely visible (reduced visual viewport), adjust
+                    if (modal.classList.contains('active') && modal.classList.contains('keyboard-open')) {
+                        const vv = window.visualViewport;
+                        const content = modal.querySelector('.modal-content');
+                        if (content) content.style.maxHeight = (vv.height - 40) + 'px';
+                    }
+                });
+            }
+        });
+    });
+})();
