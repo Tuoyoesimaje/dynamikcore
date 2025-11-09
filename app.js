@@ -235,96 +235,24 @@ function closeModal(modalId) {
     }
 }
 
-/* ===== Keyboard / Visual Viewport helpers for mobile (Android) ===== */
-// Keep inputs visible when the on-screen keyboard appears
-(function keyboardModalHelpers() {
-    // Only run in browsers that have document.querySelector
-    if (!document.querySelector) return;
+// (keyboard helpers removed)
 
-    // Utility to apply keyboard-open state and adjust modal-content maxHeight
-    function handleKeyboardOpen(modalEl, focusedEl) {
-        modalEl.classList.add('keyboard-open');
+// Minimal contact-modal focus handler: scroll focused input into view
+document.addEventListener('DOMContentLoaded', () => {
+    const contactModal = document.getElementById('contactModal');
+    if (!contactModal) return;
 
-        const content = modalEl.querySelector('.modal-content');
-        if (!content) return;
-
-        // If visualViewport is available, use it to compute available height
-        if (window.visualViewport) {
-            const vv = window.visualViewport;
-            const available = vv.height - 40; // leave some padding
-            content.style.maxHeight = available + 'px';
-        } else {
-            // fallback: use window.innerHeight
-            const available = window.innerHeight - 200;
-            content.style.maxHeight = Math.max(200, available) + 'px';
-        }
-
-        // Scroll focused element into view inside modal-content
-        setTimeout(() => {
-            try {
-                focusedEl.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
-            } catch (err) {
-                // ignore
-            }
-        }, 250);
-    }
-
-    function handleKeyboardClose(modalEl) {
-        modalEl.classList.remove('keyboard-open');
-        const content = modalEl.querySelector('.modal-content');
-        if (content) {
-            content.style.maxHeight = ''; // let CSS handle sizes again
-        }
-    }
-
-    // Attach to any modal that contains form inputs (run on DOMContentLoaded)
-    document.addEventListener('DOMContentLoaded', () => {
-        const modals = document.querySelectorAll('.modal');
-        modals.forEach(modal => {
-            // focusin/focusout bubble and work well across inputs
-            modal.addEventListener('focusin', (e) => {
-                const tag = (e.target && e.target.tagName || '').toLowerCase();
-                if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) {
-                    handleKeyboardOpen(modal, e.target);
+    contactModal.addEventListener('focusin', (e) => {
+        const tag = (e.target && e.target.tagName || '').toLowerCase();
+        if (tag === 'input' || tag === 'textarea') {
+            // allow the keyboard to open first, then scroll the field into view
+            setTimeout(() => {
+                try {
+                    e.target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+                } catch (err) {
+                    // fallback: do nothing
                 }
-            });
-
-            modal.addEventListener('focusout', (e) => {
-                // Slight delay to handle switching between inputs
-                setTimeout(() => {
-                    if (!modal.contains(document.activeElement)) {
-                        handleKeyboardClose(modal);
-                    }
-                }, 100);
-            });
-
-            // If the browser supports visualViewport, update sizes when it resizes
-            if (window.visualViewport) {
-                window.visualViewport.addEventListener('resize', () => {
-                    // If modal is open and keyboard likely visible (reduced visual viewport), adjust
-                    const vv = window.visualViewport;
-                    const content = modal.querySelector('.modal-content');
-
-                    if (modal.classList.contains('active') && modal.classList.contains('keyboard-open')) {
-                        if (content) content.style.maxHeight = (vv.height - 40) + 'px';
-
-                        // compute keyboard height and set CSS variables on modal
-                        const keyboardHeight = Math.max(0, window.innerHeight - vv.height);
-                        modal.style.setProperty('--kb', keyboardHeight + 'px');
-                        modal.style.setProperty('--vv', vv.height + 'px');
-
-                        // add pinning class so the modal-content sits above keyboard
-                        const mc = modal.querySelector('.modal-content');
-                        if (mc) mc.classList.add('pin-above-keyboard');
-                    } else {
-                        // keyboard likely closed: cleanup
-                        modal.style.removeProperty('--kb');
-                        modal.style.removeProperty('--vv');
-                        const mc = modal.querySelector('.modal-content');
-                        if (mc) mc.classList.remove('pin-above-keyboard');
-                    }
-                });
-            }
-        });
+            }, 300);
+        }
     });
-})();
+});

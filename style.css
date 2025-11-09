@@ -504,47 +504,7 @@ button{
   flex-direction: column;
 }
 
-/* Keyboard-aware modal adjustments */
-/* Prefer dynamic viewport units when available, fallback to vh */
-.modal {
-  height: 100dvh;
-  height: 100vh;
-}
-
-.modal-content {
-  /* keep some breathing room when keyboard is open */
-  max-height: calc(100dvh - 40px);
-  max-height: calc(100vh - 40px);
-}
-
-/* When JS detects keyboard (focus in), apply a different layout so modal
-   moves up a little and content can scroll to the focused field. */
-.modal.keyboard-open {
-  place-items: start;
-  padding-top: 6vh;
-  padding-bottom: 8vh;
-}
-
-.modal.keyboard-open .modal-content {
-  /* shrink modal-content so there is space for the keyboard */
-  max-height: calc(100dvh - 20vh);
-  max-height: calc(100vh - 220px);
-}
-
-/* Strong pin: when keyboard is open, allow the modal-content to become
-   fixed and sit above the keyboard. This prevents small visual-viewport
-   quirks from pushing the element out of view. JS sets --kb to keyboard
-   height (px). */
-.modal.keyboard-open .modal-content.pin-above-keyboard {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  top: auto;
-  bottom: calc(var(--kb, 220px) + 12px); /* small gap above keyboard */
-  max-height: calc(var(--vv, 600px) - 120px); /* fallback; vv set by JS */
-  width: min(95vw, 720px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
-}
+/* (keyboard helpers removed) */
 
 /* Modal Header */
 .modal-header {
