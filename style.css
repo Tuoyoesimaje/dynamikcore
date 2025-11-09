@@ -251,7 +251,9 @@ button{
   padding: 20px;
   padding-top: 10px;
   border: none;
+  font-size: 12px;
 }
+
 
 .service-icons{
   width: 25px;
@@ -344,12 +346,13 @@ button{
     width: 50%;
     font-size: 29px;
   }
-}
 
-@media (max-width: 700px) {
   .services-cont{
     flex-direction: column;
   }
+}
+
+@media (max-width: 700px) {
 
   .top-button{
     font-size: 13px;
@@ -369,6 +372,11 @@ button{
   .hero-header{
     width: 50%;
   }
+
+  .services-flex{
+    flex-direction: column;
+  }
+
 }
 
 @media (max-width: 497px){
@@ -382,16 +390,16 @@ button{
   .hero-header{
     width: 65%;
   }
+  a, span, .copyright{
+    font-size: 13px;
+  }
 }
 
 
 @media (max-width: 376px) {
-  .services-flex{
-    flex-direction: column;
-  }
 
   a, span, .copyright{
-    font-size: 12.5px;
+    font-size: 12px;
   }
 
   .top-button{
