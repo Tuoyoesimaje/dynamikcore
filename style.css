@@ -1,22 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-:root{
-  --bg: #F5F5F0; /* page background */
-  --text: #2B2B2B; /* main text / primary color */
-  --panel: #fcfcf9e3; /* cards / panels */
-  --muted: #6B7280; /* secondary text */
-  --accent-border: #E5E7EB;
-}
-
-/* Dark theme variables (toggle by setting data-theme="dark" on <html> or <body>) */
-[data-theme="dark"]{
-  --bg: #2B1E19; /* dark brown background */
-  --text: #F5EFE9; /* light text color */
-  --panel: #3a2f2b; /* darker panel */
-  --muted: #BDB6AE;
-  --accent-border: rgba(255,255,255,0.06);
-}
-
 *{
   padding: 0;
   margin: 0;
@@ -378,6 +361,14 @@ button{
   color: inherit;
 }
 
+.nav-cont2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: inherit;
+}
+
 .nav-separator{
   text-align: center;
 }
@@ -433,7 +424,7 @@ button{
   .top-button{
     display: none; /* hide the desktop about button on small screens */
   }
-
+  
   .hero-section{
     margin-top: 80px;
   }
@@ -452,6 +443,10 @@ button{
     cursor: pointer;
     padding: 6px;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  .icon-nav{
+    display: flex;
   }
 
   /* Mobile menu panel */
@@ -545,6 +540,10 @@ button{
 
 @media (max-width: 216px){
   .nav-cont{
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  .nav-cont2{
     flex-direction: column;
     margin-top: 10px;
   }
