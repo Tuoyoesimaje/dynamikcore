@@ -302,10 +302,26 @@ function closeModal(modalId) {
             if (window.visualViewport) {
                 window.visualViewport.addEventListener('resize', () => {
                     // If modal is open and keyboard likely visible (reduced visual viewport), adjust
+                    const vv = window.visualViewport;
+                    const content = modal.querySelector('.modal-content');
+
                     if (modal.classList.contains('active') && modal.classList.contains('keyboard-open')) {
-                        const vv = window.visualViewport;
-                        const content = modal.querySelector('.modal-content');
                         if (content) content.style.maxHeight = (vv.height - 40) + 'px';
+
+                        // compute keyboard height and set CSS variables on modal
+                        const keyboardHeight = Math.max(0, window.innerHeight - vv.height);
+                        modal.style.setProperty('--kb', keyboardHeight + 'px');
+                        modal.style.setProperty('--vv', vv.height + 'px');
+
+                        // add pinning class so the modal-content sits above keyboard
+                        const mc = modal.querySelector('.modal-content');
+                        if (mc) mc.classList.add('pin-above-keyboard');
+                    } else {
+                        // keyboard likely closed: cleanup
+                        modal.style.removeProperty('--kb');
+                        modal.style.removeProperty('--vv');
+                        const mc = modal.querySelector('.modal-content');
+                        if (mc) mc.classList.remove('pin-above-keyboard');
                     }
                 });
             }

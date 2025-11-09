@@ -531,6 +531,21 @@ button{
   max-height: calc(100vh - 220px);
 }
 
+/* Strong pin: when keyboard is open, allow the modal-content to become
+   fixed and sit above the keyboard. This prevents small visual-viewport
+   quirks from pushing the element out of view. JS sets --kb to keyboard
+   height (px). */
+.modal.keyboard-open .modal-content.pin-above-keyboard {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: auto;
+  bottom: calc(var(--kb, 220px) + 12px); /* small gap above keyboard */
+  max-height: calc(var(--vv, 600px) - 120px); /* fallback; vv set by JS */
+  width: min(95vw, 720px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+}
+
 /* Modal Header */
 .modal-header {
   text-align: center;
