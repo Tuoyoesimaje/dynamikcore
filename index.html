@@ -17,12 +17,12 @@
       </div>
 
       <div class="nav-bar">
-        <span class="top-button" onclick="openModal('aboutModal')" style="font-size: 12px;">
+        <a href="#about"><span class="top-button" style="font-size: 12px;">
           About us
-        </span>
-        <span class="top-button" onclick="openModal('contactModal')" style="font-size: 12px;">
+        </span></a>
+        <a href="#contact"><span class="top-button" style="font-size: 12px;">
           Contact
-        </span>
+        </span></a>
         <span class="top-button" onclick="openModal('projectsModal')" style="font-size: 12px;">
           Projects
         </span>
@@ -56,8 +56,8 @@
     <nav id="mobileMenu" class="mobile-menu" aria-hidden="true">
       <ul>
         <li><a href="#" onclick="openModal('projectsModal'); closeMobileMenu();">Projects</a></li>
-        <li><a href="#" onclick="openModal('aboutModal'); closeMobileMenu();">About</a></li>
-        <li><a href="#" onclick="openModal('contactModal'); closeMobileMenu();">Contact</a></li>
+        <li><a href="#about" onclick="closeMobileMenu();">About</a></li>
+        <li><a href="#contact" onclick="closeMobileMenu();">Contact</a></li>
         <li>
           <div class="icon-nav">
           <a href=""><img src="https://www.svgrepo.com/show/521725/linkedin.svg" alt="" class="icon2"></a>
@@ -157,7 +157,7 @@
         </div>
       </section>
 
-      <section class="about-section reveal-on-scroll">
+      <section class="about-section reveal-on-scroll" id="about">
         <div class="service-header about-header">
           <span>About Us</span>
         </div>
@@ -175,7 +175,7 @@
       </div>
 
 
-      <section class="contact-section reveal-on-scroll">
+      <section class="contact-section reveal-on-scroll" id="contact">
         <div><img src="" alt=""></div>
         <h1 class="contact-header">Tell us about your next project</h1>
         <span>Whether it's a website, mobile app, or custom automation — let's build something exceptional together.</span>
