@@ -15,9 +15,6 @@ body{
   color: #2B2B2B;
 }
 
-body::-webkit-scrollbar {
-  display: none; /* Chrome, Edge, Safari */
-}
 
 a, span, .copyright{
     font-size: 14px;
@@ -425,8 +422,19 @@ button{
 
   .services-flex{
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
+  .service-item{
+    align-items: center;
+    justify-content: center;
+  }
+
+  .service-item span, .service-item h3{
+    text-align: center;
+    width: 80%;
+  }
 }
 
 @media (max-width: 497px){
